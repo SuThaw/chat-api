@@ -29,7 +29,6 @@ module.exports = function(app,io){
 
 			var room = findClientsSocket(io,data);
 			if(room.length === 0 ) {
-
 				socket.emit('peopleinchat', {number: 0});
 			}
 // 			else if(room.length === 1) {
@@ -47,18 +46,18 @@ module.exports = function(app,io){
 // 			}
 		});
 
-// 		// When the client emits 'login', save his name and avatar,
-// 		// and add them to the room
-// 		socket.on('login', function(data) {
+		// When the client emits 'login', save his name and avatar,
+		// and add them to the room
+		socket.on('login', function(data) {
 
-// 			var room = findClientsSocket(io, data.id);
+			var room = findClientsSocket(io, data.id);
 // 			// Only two people per room are allowed
-// 			if (room.length < 2) {
+			if (room.length < 2) {
 
-// 				// Use the socket object to store data. Each client gets
-// 				// their own unique socket object
+				// Use the socket object to store data. Each client gets
+				// their own unique socket object
 
-// 				socket.username = data.user;
+// 				socket.username = data.userid;
 // 				socket.room = data.id;
 // 				socket.avatar = gravatar.url(data.avatar, {s: '140', r: 'x', d: 'mm'});
 
@@ -90,11 +89,11 @@ module.exports = function(app,io){
 // 						avatars: avatars
 // 					});
 // 				}
-// 			}
-// 			else {
-// 				socket.emit('tooMany', {boolean: true});
-// 			}
-// 		});
+			}
+			else {
+				socket.emit('tooMany', {boolean: true});
+			}
+		});
 
 // 		// Somebody left the chat
 // 		socket.on('disconnect', function() {
