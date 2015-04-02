@@ -20,18 +20,18 @@ module.exports = function(app,io){
 	// });
 
 // 	// Initialize a new socket.io application, named 'chat'
-// 	var chat = io.on('connection', function (socket) {
+	var chat = io.on('connection', function (socket) {
 
-// 		// When the client emits the 'load' event, reply with the 
-// 		// number of people in this chat room
+		// When the client emits the 'load' event, reply with the 
+		// number of people in this chat room
 
-// 		socket.on('load',function(data){
+		socket.on('load',function(data){
 
-// 			var room = findClientsSocket(io,data);
-// 			if(room.length === 0 ) {
+			var room = findClientsSocket(io,data);
+			if(room.length === 0 ) {
 
-// 				socket.emit('peopleinchat', {number: 0});
-// 			}
+				socket.emit('peopleinchat', {number: 0});
+			}
 // 			else if(room.length === 1) {
 
 // 				socket.emit('peopleinchat', {
@@ -45,7 +45,7 @@ module.exports = function(app,io){
 
 // 				chat.emit('tooMany', {boolean: true});
 // 			}
-// 		});
+		});
 
 // 		// When the client emits 'login', save his name and avatar,
 // 		// and add them to the room
@@ -120,27 +120,27 @@ module.exports = function(app,io){
 // 			// When the server receives a message, it sends it to the other person in the room.
 // 			socket.broadcast.to(socket.room).emit('receive', {msg: data.msg, user: data.user, img: data.img});
 // 		});
-// 	});
+	});
 };
 
-// function findClientsSocket(io,roomId, namespace) {
-// 	var res = [],
-// 		ns = io.of(namespace ||"/");    // the default namespace is "/"
+function findClientsSocket(io,roomId, namespace) {
+	var res = [],
+		ns = io.of(namespace ||"/");    // the default namespace is "/"
 
-// 	if (ns) {
-// 		for (var id in ns.connected) {
-// 			if(roomId) {
-// 				var index = ns.connected[id].rooms.indexOf(roomId) ;
-// 				if(index !== -1) {
-// 					res.push(ns.connected[id]);
-// 				}
-// 			}
-// 			else {
-// 				res.push(ns.connected[id]);
-// 			}
-// 		}
-// 	}
-// 	return res;
-// }
+	if (ns) {
+		for (var id in ns.connected) {
+			if(roomId) {
+				var index = ns.connected[id].rooms.indexOf(roomId) ;
+				if(index !== -1) {
+					res.push(ns.connected[id]);
+				}
+			}
+			else {
+				res.push(ns.connected[id]);
+			}
+		}
+	}
+	return res;
+}
 
 
